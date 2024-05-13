@@ -1,0 +1,6 @@
+.empty {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  font-size: large;
+}

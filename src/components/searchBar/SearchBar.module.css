@@ -1,0 +1,31 @@
+.searchBar {
+  padding: 8px;
+  background-color: #2d3487;
+  width: 100%;
+  min-height: 52px;
+}
+.searchForm {
+  position: fixed;
+  top: 8px;
+  left: calc((100% - 280px) / 2);
+}
+
+.searchForm > input {
+  position: absolute;
+  left: 50%;
+  width: 240px;
+  height: 40px;
+
+  padding-left: 44px;
+  outline: none;
+  font-size: large;
+}
+.searchForm > button {
+  position: absolute;
+  top: 4px;
+  background-color: transparent;
+  border: none;
+}
+.searchForm > button:hover > svg {
+  fill: #091ce6;
+}

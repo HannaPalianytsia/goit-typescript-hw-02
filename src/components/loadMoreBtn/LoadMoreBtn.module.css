@@ -1,0 +1,16 @@
+.loadMore {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+.loadMore > button {
+  font-size: medium;
+  border: none;
+  border-radius: 4px;
+  background-color: #2d3487;
+  color: #fff;
+  padding: 8px;
+}
+.loadMore > button:hover {
+  background-color: #454a81;
+}

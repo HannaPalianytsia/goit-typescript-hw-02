@@ -8,25 +8,35 @@ import ErrorMessage from "./components/errorMessage/ErrorMessage";
 import LoadMoreBtn from "./components/loadMoreBtn/LoadMoreBtn";
 import ImageModal from "./components/imageModal/ImageModal";
 import "./App.css";
+import { Image } from "./types";
 
 const App = () => {
-  const [query, setQuery] = useState("");
-  const [page, setPage] = useState(1);
-  const [images, setImages] = useState([]);
-  const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState(null);
-  const [isEmpty, setIsEmpty] = useState(false);
-  const [isVisible, setIsVisible] = useState(false);
-  const [showModal, setShowModal] = useState(false);
-  const [modalUrl, setModalUrl] = useState("");
-  const [modalAlt, setModalAlt] = useState("");
+  const [query, setQuery] = useState<string>("");
+  const [page, setPage] = useState<number>(1);
+  const [images, setImages] = useState<Image[]>([]);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [error, setError] = useState<unknown>(null);
+  const [isEmpty, setIsEmpty] = useState<boolean>(false);
+  const [isVisible, setIsVisible] = useState<boolean>(false);
+  const [showModal, setShowModal] = useState<boolean>(false);
+  const [modalUrl, setModalUrl] = useState<string>("");
+  const [modalAlt, setModalAlt] = useState<string>("");
+
+  interface GetResults {
+    results: Image[];
+    total: number;
+    total_pages: number;
+  }
 
   useEffect(() => {
     if (!query) return;
-    const fetchData = async () => {
+    const fetchData = async (): Promise<void> => {
       setIsLoading(true);
       try {
-        const { results, total, total_pages } = await getPhotos(query, page);
+        const { results, total, total_pages }: GetResults = await getPhotos(
+          query,
+          page
+        );
         if (!results.length) {
           setIsEmpty(true);
           return;
@@ -44,7 +54,7 @@ const App = () => {
     fetchData();
   }, [page, query]);
 
-  const notify = (totalHits) =>
+  const notify = (totalHits: number) =>
     toast("A total of " + totalHits + " images were successfully found", {
       duration: 4000,
       style: {
@@ -54,7 +64,7 @@ const App = () => {
       },
     });
 
-  const handleSubmit = (inputValue) => {
+  const handleSubmit = (inputValue: string): void => {
     setQuery(inputValue);
     setPage(1);
     setImages([]);
@@ -63,16 +73,16 @@ const App = () => {
     setError(null);
   };
 
-  const handleLoadMore = () => {
+  const handleLoadMore = (): void => {
     setPage((prevPages) => prevPages + 1);
   };
 
-  const openModal = (url, alt) => {
+  const openModal = (url: string, alt: string) => {
     setShowModal(true);
     setModalUrl(url);
     setModalAlt(alt);
   };
-  const closeModal = () => {
+  const closeModal = (): void => {
     setShowModal(false);
     setModalUrl("");
     setModalAlt("");

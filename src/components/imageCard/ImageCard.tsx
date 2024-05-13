@@ -1,6 +1,19 @@
+import { FC } from "react";
 import styles from "./ImageCard.module.css";
 
-const ImageCard = ({ small, regular, alt_description, openModal }) => {
+interface ImageCardProps {
+  small: string;
+  regular: string;
+  alt_description: string;
+  openModal: (url: string, alt: string) => void;
+}
+
+const ImageCard: FC<ImageCardProps> = ({
+  small,
+  regular,
+  alt_description,
+  openModal,
+}) => {
   return (
     <div className={styles.card}>
       <img

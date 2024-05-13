@@ -8,8 +8,8 @@ axios.defaults.params = {
   per_page: 15,
 };
 
-export const getPhotos = async (query, page) => {
-  const { data } = await axios.get(`?query=${query}&page=${page}`);
+export const getPhotos = async <T>(query: string, page: number): Promise<T> => {
+  const { data } = await axios.get<T>(`?query=${query}&page=${page}`);
 
   return data;
 };

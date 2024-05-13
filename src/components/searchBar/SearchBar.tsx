@@ -1,16 +1,20 @@
 import { AiOutlineSearch } from "react-icons/ai";
 import toast, { Toaster } from "react-hot-toast";
 import styles from "./SearchBar.module.css";
-import { useState } from "react";
+import { ChangeEvent, FC, FormEvent, useState } from "react";
 
-const SearchBar = ({ onSubmit }) => {
-  const [query, setQuery] = useState("");
+interface SearchBarProps {
+  onSubmit: (inputValue: string) => void;
+}
 
-  const handleChange = (event) => {
+const SearchBar: FC<SearchBarProps> = ({ onSubmit }) => {
+  const [query, setQuery] = useState<string>("");
+
+  const handleChange = (event: ChangeEvent<HTMLInputElement>): void => {
     setQuery(event.target.value);
   };
 
-  const handleSubmit = (event) => {
+  const handleSubmit = (event: FormEvent<HTMLFormElement>): void => {
     event.preventDefault();
     if (query.trim() === "") {
       notify();
